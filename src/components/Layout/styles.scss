@@ -1,0 +1,29 @@
+.App-logo {
+    background-color: black;
+    position: relative;
+    overflow: hidden;
+    &__image {
+        max-height: 30vmax;
+        width: 100%;
+    }
+ nav {
+    // position: absolute;
+    ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 50%;
+        margin: auto;
+        .item__link {
+            color: white;
+            font-size: large;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+            & :hover {
+                transition: all 0.3s ease-in-out;
+                color: #eaeaea;
+            }
+        }
+    }
+}
+}
