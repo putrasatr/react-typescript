@@ -1,8 +1,13 @@
-import React from "react";
-import Router from "./routers";
+import React from 'react';
+import Router from "./routers"
+interface Props {
 
-export default function App () {
+}
+
+const App: React.FC<Props> = () => {
   return (
     <Router />
   )
 };
+
+export default App
