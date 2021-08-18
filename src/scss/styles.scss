@@ -1,6 +1,8 @@
 @import "../pages/Home/components/styles.scss";
 @import "../components/Layout/styles.scss";
 @import "../components/CreatePost/styles.scss";
+@import "./config.scss";
+
 
 html,
 body {
@@ -11,6 +13,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: $bg-main-color;
+  scroll-behavior: smooth ;
 }
 
 #root {
@@ -30,6 +34,7 @@ nav {
 }
 ul {
     list-style: none;
+    padding: 0;
 }
 a {
     color: inherit;
