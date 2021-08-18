@@ -1,6 +1,26 @@
-.container {
-    background-color: red;
+.main__wrapper {
+    padding: 1em;
     & span{
-        color: blue
+        color: rgb(49, 49, 49)
     }
+}
+
+.item__img {
+    width: 80%;
+    height: 10em;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 1em 0;
+    align-content: center;
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
+.col__items {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

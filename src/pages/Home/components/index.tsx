@@ -1,15 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { PropsRoute } from "../../../constants";
+import ListItem from "./listItem";
+import image1 from "../../../assets/images/moto4K.jpg";
+import image2 from "../../../assets/images/motox.jpeg";
+import image3 from "../../../assets/images/xsr.jpeg";
 
-const Home: React.FC<PropsRoute> = ({ home }): JSX.Element => {
-    const random = Math.random() * 1000 | 0
+const Home: React.FC<PropsRoute> = (): JSX.Element => {
+    const imgArr = [image1, image2, image3]
     return (
-        <div className="container">
-            <span className="title">{home}</span>
-            <Link to={`/add/${random}`}>
-                <span>Add</span>
-            </Link>
+        <div className="main__wrapper">
+            <ListItem data={imgArr} />
         </div>
     )
 }
