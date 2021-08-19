@@ -1,8 +1,11 @@
 import React from "react";
 
-const Gallery = () =>{
-    console.log(process.env)
-    return(
+interface Props {
+
+}
+
+const Gallery: React.FC<Props> = (): JSX.Element => {
+    return (
         <div>
             <span>Gallery</span>
         </div>
