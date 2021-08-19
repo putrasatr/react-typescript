@@ -32,12 +32,12 @@ const Layout: React.FC<Props> = ({ children }): JSX.Element => {
                     </ul>
                     <ul className="link__item__footer">
                         <li>
-                            <a href="https://github.com/putrasatr/react-typescript" className="link__item__footer__link">
+                            <a href="https://github.com/putrasatr/react-typescript" target="blank" className="link__item__footer__link">
                                 <span className="link__item__footer__link">Github</span>
                             </a>
                         </li>
                         <li>
-                            <a href="https://react.com" className="link__item__footer__link">
+                            <a href="https://react.com" className="link__item__footer__link" target="blank">
                                 <span className="link__item__footer__link">React</span>
                             </a>
                         </li>

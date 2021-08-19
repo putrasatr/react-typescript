@@ -36,7 +36,7 @@ const Component = ({ match }: RouteComponentProps<Props>) => {
                 onBlur={() => console.log("okay")}
                 onKeyDown={handleSubmit}
                 className="form__input" />
-            <ItemList data={data} params={params}/>
+            <ItemList data={data} params={params} />
         </div>
     )
 };
