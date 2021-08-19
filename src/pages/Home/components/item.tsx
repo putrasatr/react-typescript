@@ -7,11 +7,10 @@ interface Props {
 }
 
 const Item: React.FC<Props> = ({ image, text }) => {
-    const imgName = image.split("/")[3]
-    console.log(imgName)
+    const imageName = image.split("/")[3].split(".")[0]
     return (
         <div className="item__img">
-            <Link to={`/detail/${imgName}`}>
+            <Link to={`/detail/${imageName}`} >
                 <img src={image} alt="" />
             </Link>
         </div>
