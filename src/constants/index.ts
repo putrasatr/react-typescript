@@ -6,3 +6,5 @@ export type PropsRoute = {
 export type Props = {
     children?: any;
 }
+
+export const API_URL = "http://localhost:3002/"
