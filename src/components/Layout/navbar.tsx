@@ -1,11 +1,13 @@
 import React from "react";
-import logo from "../../assets/images/caferacer.jpeg";
 import { Link } from "react-router-dom";
 
-export const Navbar = () => {
+export const Navbar: React.FC = () => {
     return (
         <div className="App-logo">
-            <img src={logo} alt="" className="App-logo__image" />
+            <div className="jumbotron">
+                <h1 className="jumbotron__text">Ride With Style</h1>
+                <button className="jumbotron__btn__login">Login</button>
+            </div>
             <nav>
                 <ul>
                     <Link className="item__link" to="/">
