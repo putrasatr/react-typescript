@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { API_URL } from "../../../constants";
-import { getNews } from "../../../services/actions"
 
 interface Props {
 
@@ -10,9 +9,8 @@ type ItemProps = {
 }
 const Gallery: React.FC<Props> = (): JSX.Element => {
     const [items, setData] = useState<ItemProps[]>([])
-    const load = async () => {
-        const data: any = await getNews()
-        setData(data)
+    const handleButton = () => {
+        setData([])
     }
     useEffect(() => {
         console.log("enter gallery")
@@ -23,7 +21,7 @@ const Gallery: React.FC<Props> = (): JSX.Element => {
 
     return (
         <div>
-            <button onClick={load}>
+            <button onClick={handleButton}>
                 <span>Load</span>
             </button>
             <span>Gallery</span>
