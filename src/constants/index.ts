@@ -9,3 +9,4 @@ export type Props = {
 
 export const API_URL = "http://localhost:3002/"
 export const API_URL_GQL = "http://localhost:4001/graphql"
+export const API_URL_OTOBAI = "http://localhost:4001/"
