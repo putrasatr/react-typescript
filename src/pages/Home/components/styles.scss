@@ -1,12 +1,12 @@
 .main__wrapper {
     padding: 1em;
-    & span{
-        color: rgb(49, 49, 49)
+    & span {
+        color: rgb(49, 49, 49);
     }
 }
 
-.item__img {
-    width: 80%;
+.item {
+    width: 60%;
     height: 10em;
     border-radius: 10px;
     overflow: hidden;
@@ -15,6 +15,7 @@
     img {
         width: 100%;
         height: auto;
+        border-radius: inherit;
     }
 }
 .col__items {

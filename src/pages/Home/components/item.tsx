@@ -1,4 +1,5 @@
 import React from 'react';
+import { API_URL_OTOBAI } from '../../../constants';
 // import { Link } from 'react-router-dom';
 
 export type ItemProps = {
@@ -16,12 +17,12 @@ interface Props {
 const Item: React.FC<Props> = ({ item, text }) => {
     const { _id, image, created_date, description, engine_volume } = item
     return (
-        <div className="item__img">
+        <div className="item">
             <span>{_id}</span>
-            <span>{image}</span>
             <span>{created_date}</span>
             <span>{description}</span>
             <span>{engine_volume}</span>
+            <img src={API_URL_OTOBAI + image} alt=""/>
         </div>
     )
 };
