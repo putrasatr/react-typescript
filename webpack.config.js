@@ -49,7 +49,9 @@ module.exports = {
     contentBase: path.resolve(__dirname, "./public"),
     historyApiFallback: true
   },
-  entry: path.resolve(__dirname, "./src/index.tsx"),
+  entry: path.resolve(__dirname, "./src/store/store.ts"),
+  
+  output: outPath,
   module: {
     rules: [
       {
