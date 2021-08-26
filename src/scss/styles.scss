@@ -14,10 +14,21 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("../assets/images/bgOtobai.png");
-  background-position: center;
+  background-color: $fg-main-color;
+  background-position: top;
   background-clip: content-box;
   scroll-behavior: smooth ;
+  font-feature-settings: normal;
+  -webkit-font-feature-settings: normal;
+  background-repeat: no-repeat;
+}
+
+#image_Nav{
+  width: 100%;
+  height: 20%;
+  position: absolute;
+  top: 0;
+  background-image: url("../assets/images/bgOtobai.png");
 }
 
 #root {
