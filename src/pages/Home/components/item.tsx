@@ -22,7 +22,7 @@ const Item: React.FC<Props> = ({ item, text }) => {
             <span>{created_date}</span>
             <span>{description}</span>
             <span>{engine_volume}</span>
-            <img src={API_URL_OTOBAI + image} alt=""/>
+            <img src={API_URL_OTOBAI + image} alt="" />
         </div>
     )
 };

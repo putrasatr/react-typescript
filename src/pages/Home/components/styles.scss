@@ -4,6 +4,29 @@
         color: rgb(49, 49, 49);
     }
 }
+.mini__carousel {
+    display: flex;
+    flex-direction: column;
+    // height: 100px;
+    padding: 0;
+    overflow: hidden;
+    .slider {
+        display: flex;
+        flex-direction: row !important;
+    }
+    &__image {
+        max-height: 100px;
+        max-width: 100%;
+        margin: 0;
+    }
+}
+// .slide {
+//     width: 20px;
+//     &-selected {
+//         width: 20px;
+//     }
+// }
+
 .content__card {
     width: 80%;
     background-color: $bg-main-color;
