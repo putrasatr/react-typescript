@@ -29,14 +29,17 @@ const Component = ({ match }: RouteComponentProps<Props>) => {
     );
     return (
         <div className="form">
-            <input
+            <div className="form__header">
+                <span></span>
+            </div>
+            {/* <input
                 value={text}
                 onChange={handleChange}
                 autoFocus
                 onBlur={() => console.log("okay")}
                 onKeyDown={handleSubmit}
                 className="form__input" />
-            <ItemList data={data} params={params} />
+            <ItemList data={data} params={params} /> */}
         </div>
     )
 };
