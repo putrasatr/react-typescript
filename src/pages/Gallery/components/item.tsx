@@ -1,3 +1,4 @@
+import Fade from 'react-reveal/Fade';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { API_URL_OTOBAI } from '../../../constants';
@@ -17,21 +18,23 @@ interface Props {
 const Item: React.FC<Props> = ({ item, text }) => {
     const { _id, image, brand, description } = item
     return (
-        <div className="item container__item">
-            <Link to={`/detail/${_id}`}>
-                <img src={API_URL_OTOBAI + image} alt="" className="item__image" />
-            </Link>
-            <Link to="/post/12">
-                <div className="item__card__brand">
-                    <strong>{brand}</strong>
-                </div>
-            </Link>
-            <Link to={`/detail/${_id}`}>
-                <div className="item__card">
-                    <span>{description}</span>
-                </div>
-            </Link>
-        </div>
+        <Fade bottom>
+            <div className="item container__item">
+                <Link to={`/detail/${_id}`}>
+                    <img src={API_URL_OTOBAI + image} alt="" className="item__image" />
+                </Link>
+                <Link to="/post/12">
+                    <div className="item__card__brand">
+                        <strong>{brand}</strong>
+                    </div>
+                </Link>
+                <Link to={`/detail/${_id}`}>
+                    <div className="item__card">
+                        <span>{description}</span>
+                    </div>
+                </Link>
+            </div>
+        </Fade>
     )
 };
 
