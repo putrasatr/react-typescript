@@ -1,37 +1,27 @@
-import React, { useEffect, useState } from "react";
-import { API_URL } from "../../../constants";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import ListItem from "./listItem";
+import { getBike } from "../../../services/actions";
+import { RootState } from "../../../store/store";
+
+
 
 interface Props {
 
 }
-type ItemProps = {
-    image: string;
-}
-const Gallery: React.FC<Props> = (): JSX.Element => {
-    const [items, setData] = useState<ItemProps[]>([])
-    const handleButton = () => {
-        setData([])
-    }
-    useEffect(() => {
-        console.log("enter gallery")
-        return () => {
-            console.log("Leave Gallery")
-        }
-    })
 
+const Gallery: React.FC<Props> = (): JSX.Element => {
+    const dispatch = useDispatch()
+    const { data }: any = useSelector<RootState>(({ stateReducer: { gallery } }) => gallery)
+    useEffect(() => {
+        dispatch(getBike("", ""))
+    }, [dispatch])
     return (
-        <div>
-            <button onClick={handleButton}>
-                <span>Load</span>
-            </button>
-            <span>Gallery</span>
-            <div className="col__items">
-                {items.map(({ image }, i: number) => (
-                    <div className="item__img" key={i}>
-                        <img src={`${API_URL}images/news/${image}`} alt="" />
-                    </div>
-                ))}
-            </div>
+        <div className="main__wrapper">
+            {data
+                ? <ListItem data={data} />
+                : <h1>Error Connection</h1>}
         </div>
     )
 }
