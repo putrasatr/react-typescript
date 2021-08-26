@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Router } from 'react-router-dom';
-
+import "@egjs/flicking-plugins/dist/flicking-plugins.css";
 
 import './index.css';
 import "./scss/styles.scss";

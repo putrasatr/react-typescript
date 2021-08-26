@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 type LinkProps = {
     urlTo: string;
@@ -11,6 +11,8 @@ const links: LinkProps[] = [
 ]
 
 export const Navbar: React.FC = () => {
+    const [isNavOpen, setNavOpen] = useState<boolean>(false)
+
     return (
         <div className="App-logo">
             <div className="jumbotron">
@@ -18,7 +20,12 @@ export const Navbar: React.FC = () => {
                 <h1 className="jumbotron__text">Ride With Style</h1>
                 <button className="jumbotron__btn__login">Login</button>
             </div>
-            <nav>
+            <div className="nav__btn">
+                <button className="nav__btn__set" onClick={() => setNavOpen(!isNavOpen)}>
+                    <span>X</span>
+                </button>
+            </div>
+            <nav className={isNavOpen ? "nav__active" : "nav"}>
                 <ul>
                     {links.map(({ urlTo, name }: LinkProps, i: number) => (
                         <Link className="item__link" to={urlTo} key={i}>

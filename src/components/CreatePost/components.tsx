@@ -30,16 +30,16 @@ const Component = ({ match }: RouteComponentProps<Props>) => {
     return (
         <div className="form">
             <div className="form__header">
-                <span></span>
+                <span>Create A Bike</span>
             </div>
-            {/* <input
+            <input
                 value={text}
                 onChange={handleChange}
                 autoFocus
                 onBlur={() => console.log("okay")}
                 onKeyDown={handleSubmit}
                 className="form__input" />
-            <ItemList data={data} params={params} /> */}
+            <ItemList data={data} params={params} />
         </div>
     )
 };
