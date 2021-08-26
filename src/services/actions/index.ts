@@ -48,14 +48,18 @@ export const getDataSuccess = (data: DataType): LoadAction => {
     return { type: 'LOAD_DATA', data }
 }
 
-export const getBike = (limit: number, ofsset: number): ThunkAction<Promise<void>, {}, {}, AnyAction> => {
+export const getBike = (bikeId?: string | "", keyword?: string | ""): ThunkAction<Promise<void>, {}, {}, AnyAction> => {
     return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
         return new Promise<void>((resolve) => {
             apolloCllient.query({
-                query: GET_BIKE
+                query: GET_BIKE,
+                variables: {
+                    bikeId,
+                    keyword
+                }
             }).then(({ data: { otobai } }) => {
-                dispatch(getDataSuccess(otobai))
-            })
+                dispatch(getDataSuccess(otobai.items))
+            }).catch(err => console.log(err))
         })
     }
 }

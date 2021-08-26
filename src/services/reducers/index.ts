@@ -1,13 +1,13 @@
 import { combineReducers } from 'redux'
 import accessToken, { AccessToken } from './login'
-import home, { ResponData } from './home'
+import gallery, { ResponData } from './gallery'
 
 export interface State {
     accessToken: AccessToken;
-    home: ResponData;
+    gallery: ResponData;
 }
 
 export default combineReducers<State>({
     accessToken,
-    home
+    gallery
 })
