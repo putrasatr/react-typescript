@@ -1,5 +1,6 @@
 import React from "react";
 import { RouteComponentProps } from "react-router-dom";
+import { checkPalindrome } from "../../helpers";
 import ItemList from "./itemList"
 
 interface Props {
@@ -22,7 +23,7 @@ const Component = ({ match }: RouteComponentProps<Props>) => {
             if (event.which === 13) {
                 const text = event.currentTarget.value.trim();
                 setInputText('');
-                setData((prevData: string[]) => [...prevData, text])
+                setData((prevData: string[]) => [...prevData, checkPalindrome(text)])
             }
         },
         [setInputText]
