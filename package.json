@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@apollo/client": "^3.4.10",
     "@egjs/flicking": "^4.2.3",
     "@egjs/flicking-plugins": "^4.2.1",
     "@egjs/react-flicking": "^4.2.3",
@@ -50,7 +51,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "gen": "graphql-codegen --config codegen.yml"
   },
   "eslintConfig": {
     "extends": [
@@ -74,6 +76,10 @@
     "@babel/core": "^7.15.0",
     "@babel/preset-env": "^7.15.0",
     "@babel/preset-react": "^7.14.5",
+    "@graphql-codegen/cli": "^2.1.1",
+    "@graphql-codegen/typescript": "^2.1.2",
+    "@graphql-codegen/typescript-operations": "^2.1.2",
+    "@graphql-codegen/typescript-react-apollo": "^3.1.2",
     "@types/axios": "^0.14.0",
     "babel-loader": "8.1.0"
   }
