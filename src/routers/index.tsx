@@ -1,6 +1,8 @@
 import React from "react";
 import { StaticContext, RouteComponentProps } from "react-router";
 import { Switch, Route } from "react-router-dom";
+
+import { Login } from "../pages";
 import { Layout } from "../components";
 import { routers } from "./routes";
 
@@ -28,6 +30,11 @@ const renderWithLayout: React.FC<RenderProps> = ({ Component, props }) => {
 const router = () => {
     return (
         <Switch>
+            <Route
+                exact
+                path="/signin"
+                render={(props) => renderWithLayout({ Component: Login, props })}
+            />
             {routers.map(({ isExact, path, Component }: Props, i: number) => (
                 <Route
                     key={i}

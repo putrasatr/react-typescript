@@ -1,0 +1,43 @@
+.card__login {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &__header {
+        width: 100%;
+        text-align: center;
+        color: black;
+        font-size: 20px;
+        font-weight: bold;
+    }
+    &__form {
+        width: 100%;
+        padding: 20px 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        &__input {
+            text-align: start;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            input{
+                line-height: 2;
+                padding: 5px 10px;
+                border-radius: 10px;
+                color: #2c2b2b;
+                font-weight: bold;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                &:focus-visible{
+                    outline: none;
+                    border: 1px solid #eaeaea;
+                    box-shadow: 0 0.3px 0.3px 2px rgb(204, 197, 197);
+                }
+            }
+        }
+    }
+}
