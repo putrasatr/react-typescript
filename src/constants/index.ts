@@ -6,6 +6,10 @@ export type PropsRoute = {
 export type Props = {
     children?: any;
 }
+export const userData = {
+    username: "Putra",
+    password: "putra234"
+}
 
 // export const API_URL = "http://localhost:3002/"
 // export const API_URL_GQL = "http://localhost:4001/graphql"
