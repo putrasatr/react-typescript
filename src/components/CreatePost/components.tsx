@@ -19,18 +19,8 @@ const Component = ({ match }: RouteComponentProps<Props>) => {
             setInputText(text);
             setData(data)
         },
-        [setInputText, data]
+        [setInputText, text, data]
     );
-    // const handleSubmit = React.useCallback(
-    //     (event: React.KeyboardEvent<HTMLInputElement>) => {
-    //         if (event.which === 13) {
-    //             const text = event.currentTarget.value.trim();
-    //             setInputText('');
-    //             setData((prevData: string[]) => [...prevData, checkPalindrome(text)])
-    //         }
-    //     },
-    //     [setInputText]
-    // );
     return (
         <div className="form">
             <div className="form__header">

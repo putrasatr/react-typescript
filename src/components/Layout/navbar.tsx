@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { isAuthenticated } from "../../utils";
 type LinkProps = {
     urlTo: string;
     name: string;
@@ -18,11 +19,11 @@ export const Navbar: React.FC = () => {
             <div className="jumbotron">
                 <h1 className="jumbotron__text">Otobai.</h1>
                 <h1 className="jumbotron__text">Ride With Style</h1>
-                <button className="jumbotron__btn__login">
+                {!isAuthenticated && <button className="jumbotron__btn__login">
                     <Link to="/signin">
                         Login
                     </Link>
-                </button>
+                </button>}
             </div>
             <div className="nav__btn">
                 <button className="nav__btn__set" onClick={() => setNavOpen(!isNavOpen)}>

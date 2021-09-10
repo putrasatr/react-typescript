@@ -14,7 +14,7 @@ type Props = {
 const DetailItem = ({ match }: RouteComponentProps<Props>) => {
     const { params: { bikeId } } = match
     const dispatch = useDispatch()
-    const { data }: any = useSelector<RootState>(({ stateReducer: { gallery } }): ResponData => gallery)
+    const { data }: any = useSelector<RootState>(({ state: { gallery } }): ResponData => gallery)
 
     useEffect(() => {
         dispatch(getBike(bikeId, ""))
