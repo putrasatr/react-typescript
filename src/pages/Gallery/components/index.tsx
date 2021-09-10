@@ -13,7 +13,7 @@ interface Props {
 
 const Gallery: React.FC<Props> = (): JSX.Element => {
     const dispatch = useDispatch()
-    const { data }: any = useSelector<RootState>(({ stateReducer: { gallery } }) => gallery)
+    const { data }: any = useSelector<RootState>(({ state: { gallery } }) => gallery)
     useEffect(() => {
         dispatch(getBike("", ""))
     }, [dispatch])
