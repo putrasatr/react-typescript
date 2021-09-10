@@ -22,7 +22,7 @@ const Login: React.FC<Props> = () => {
                     <button type="button" onClick={() => setHide(!isHide)}>{isHide ? "Show" : "Hide"}</button>
                 </div>
             </form>
-            <div>
+            <div className="card__login__form__submit">
                 <button>
                     <span>Login</span>
                 </button>
