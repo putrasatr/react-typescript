@@ -2,6 +2,7 @@ import { apolloCllient } from "./connect";
 import { ThunkAction, ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux';
 import { GET_BIKE } from "../../graphql";
+import { checkUser } from "../../helpers";
 export type DataType = object[] | boolean | []
 export interface SetAction {
     type: 'SET'
@@ -15,30 +16,27 @@ export interface SetFetcing {
     type: 'SET_FETCHING'
     isFetching: boolean
 }
+export interface SetLogin {
+    type: 'SET_LOGIN'
+    status: boolean
+    msg: string,
+    accessToken: string
+}
 export type Action =
-    SetAction
-    | SetFetcing
-    | LoadAction
-export const set = (accessToken: string): SetAction => {
-    return { type: 'SET', accessToken }
-}
-export const isFetching = (isFetching: boolean): SetFetcing => {
-    return { type: 'SET_FETCHING', isFetching }
-}
+    LoadAction
+    | SetLogin
+export const setLogin = (msg: string, status: boolean, accessToken: string): SetLogin => ({ type: "SET_LOGIN", msg, status, accessToken })
+
 export const login = (username: string, password: string): ThunkAction<Promise<void>, {}, {}, AnyAction> => {
-    // Invoke API
     return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
-        return new Promise<void>((resolve) => {
-            dispatch(isFetching(true))
-            console.log('Login in progress')
-            setTimeout(() => {
-                dispatch(set('this_is_access_token'))
-                setTimeout(() => {
-                    dispatch(isFetching(false))
-                    console.log('Login done')
-                    resolve()
-                }, 1000)
-            }, 3000)
+        return new Promise<void>(async (resolve) => {
+            try {
+                await checkUser(username, password)
+                dispatch(setLogin("Welcome", true,"fasklnfdlsinlkwe2314"))
+                resolve()
+            } catch (error) {
+                dispatch(setLogin("username or password not found", false,""))
+            }
         })
     }
 }
@@ -50,16 +48,20 @@ export const getDataSuccess = (data: DataType): LoadAction => {
 
 export const getBike = (bikeId?: string | "", keyword?: string | ""): ThunkAction<Promise<void>, {}, {}, AnyAction> => {
     return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
-        return new Promise<void>((resolve) => {
-            apolloCllient.query({
-                query: GET_BIKE,
-                variables: {
-                    bikeId,
-                    keyword
-                }
-            }).then(({ data: { otobai } }) => {
-                dispatch(getDataSuccess(otobai.items))
-            }).catch(err => console.log(err))
+        return new Promise<void>(async (resolve) => {
+            try {
+                const { data: { otobai } } = await apolloCllient.query({
+                    query: GET_BIKE,
+                    variables: {
+                        bikeId,
+                        keyword
+                    }
+                })
+                dispatch(getDataSuccess(otobai.items));
+                resolve()
+            } catch (error) {
+                console.log(error)
+            }
         })
     }
 }
