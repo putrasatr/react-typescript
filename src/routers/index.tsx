@@ -5,6 +5,7 @@ import { Switch, Route } from "react-router-dom";
 import { Login } from "../pages";
 import { Layout } from "../components";
 import { routers } from "./routes";
+import ProtectedRoute from "./protected.route";
 
 interface Props {
     isExact?: boolean;
@@ -12,14 +13,14 @@ interface Props {
     Component?: any;
 }
 
-interface RenderProps {
+export interface RenderProps {
     Component: any;
     props: RouteComponentProps<{
         [x: string]: string | undefined;
     }, StaticContext, unknown>;
 }
 
-const renderWithLayout: React.FC<RenderProps> = ({ Component, props }) => {
+export const renderWithLayout: React.FC<RenderProps> = ({ Component, props }) => {
     return (
         <Layout {...props}>
             <Component {...props} />
@@ -27,7 +28,7 @@ const renderWithLayout: React.FC<RenderProps> = ({ Component, props }) => {
     );
 };
 
-const router = () => {
+const router = (props: any) => {
     return (
         <Switch>
             <Route
@@ -36,11 +37,11 @@ const router = () => {
                 render={(props) => renderWithLayout({ Component: Login, props })}
             />
             {routers.map(({ isExact, path, Component }: Props, i: number) => (
-                <Route
+                <ProtectedRoute
                     key={i}
                     exact={isExact}
                     path={path}
-                    render={(props) => renderWithLayout({ Component, props })}
+                    component={Component}
                 />
             ))}
         </Switch>
