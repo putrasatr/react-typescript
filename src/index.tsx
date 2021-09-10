@@ -12,7 +12,7 @@ import { Provider } from 'react-redux';
 import store from './store/store';
 
 ReactDOM.render(
-  <React.StrictMode>
+  <React.Fragment>
     <Router history={history}>
       <BrowserRouter>
         <Provider store={store}>
@@ -20,7 +20,7 @@ ReactDOM.render(
         </Provider>
       </BrowserRouter>
     </Router>
-  </React.StrictMode>,
+  </React.Fragment>,
   document.getElementById('root')
 );
 
