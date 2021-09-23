@@ -1,62 +1,72 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { RouteComponentProps } from "react-router-dom";
+import {
+    useQuery
+} from "react-query";
+import { useForm } from "react-hook-form";
 
 interface Props {
     id?: string;
     productId: string;
 }
-type DataProps = { [data: string]: string }
+// type DataProps = { [data: string]: string }
 type InputProps = { [text: string]: string }
 
 const Component = ({ match }: RouteComponentProps<Props>) => {
     const { params } = match
-    const [text, setInputText] = React.useState<InputProps>({})
-    let [data, setData] = React.useState<DataProps>({})
-    const handleChange = React.useCallback(
-        ({ target: { value, name } }: React.ChangeEvent<HTMLInputElement>) => {
-            data[name] = value
-            text[name] = value
-            setInputText(text);
-            setData(data)
+    const { register, handleSubmit } = useForm()
+    const { data } = useQuery(
+        ["getOtobai"],
+        () => {
+
         },
-        [setInputText, text, data]
-    );
+        { keepPreviousData: true, refetchOnReconnect: true, refetchOnWindowFocus: false }
+    )
+
+    const onSubmit = useCallback(
+        (body: InputProps) => {
+            console.log(body)
+            console.log(data)
+        },
+        [data],
+    )
     return (
-        <div className="form">
-            <div className="form__header">
-                <span>Create A Bike {params.id}</span>
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="form">
+                <div className="form__header">
+                    <span>Create A Bike {params.id}</span>
+                </div>
+                <div className="form__input">
+                    <label htmlFor="brand">Brand</label>
+                    <input
+                        id="brand"
+                        placeholder="Please enter brand name"
+                        autoFocus
+                        className="form__input__control"
+                        {...register("brand")} />
+                </div>
+                <div className="form__input">
+                    <label htmlFor="ev">Engine Volume</label>
+                    <input
+                        id="ev"
+                        type="number"
+                        placeholder="Please enter engine volume"
+                        className="form__input__control"
+                        {...register("engine_volume")} />
+                </div>
+                <div className="form__input">
+                    <label htmlFor="ev">Description (optional)</label>
+                    <textarea
+                        id="ev"
+                        name="engine_volume"
+                        placeholder="Please enter description"
+                        className="form__input__control" />
+                </div>
+                <div className="form__input">
+                    <button className="form__input__button" type="submit">Submit</button>
+                </div>
             </div>
-            <div>
-                <label htmlFor="brand">Brand</label>
-                <input
-                    id="brand"
-                    name="brand"
-                    placeholder="Please enter brand name"
-                    value={text.brand}
-                    onChange={handleChange}
-                    autoFocus
-                    onBlur={() => console.log("okay")}
-                    className="form__input" />
-            </div>
-            <div>
-                <label htmlFor="ev">Engine Volume</label>
-                <input
-                    id="ev"
-                    name="engine_volume"
-                    onChange={handleChange}
-                    type="number"
-                    placeholder="Please enter engine volume"
-                    className="form__input" />
-            </div>
-            <div>
-                <label htmlFor="ev">Description</label>
-                <textarea
-                    id="ev"
-                    name="engine_volume"
-                    placeholder="Please enter engine volume"
-                    className="form__input" />
-            </div>
-        </div>
+        </form>
     )
 };
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter, Router } from 'react-router-dom';
 import "@egjs/flicking-plugins/dist/flicking-plugins.css";
 
@@ -11,15 +12,19 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './store/store';
 
+const queryClient = new QueryClient()
+
 ReactDOM.render(
   <React.Fragment>
-    <Router history={history}>
-      <BrowserRouter>
-        <Provider store={store}>
-          <App />
-        </Provider>
-      </BrowserRouter>
-    </Router>
+    <QueryClientProvider client={queryClient}>
+      <Router history={history}>
+        <BrowserRouter>
+          <Provider store={store}>
+            <App />
+          </Provider>
+        </BrowserRouter>
+      </Router>
+    </QueryClientProvider>
   </React.Fragment>,
   document.getElementById('root')
 );
