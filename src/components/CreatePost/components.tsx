@@ -1,35 +1,31 @@
 import React, { useCallback } from "react";
 import { RouteComponentProps } from "react-router-dom";
-import {
-    useQuery
-} from "react-query";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux"
+
+import { addBike, InputProps } from "../../services/actions"
+import { RootState } from "../../store/store"
 
 interface Props {
     id?: string;
     productId: string;
 }
 // type DataProps = { [data: string]: string }
-type InputProps = { [text: string]: string }
+
 
 const Component = ({ match }: RouteComponentProps<Props>) => {
     const { params } = match
+    const dispatch = useDispatch()
     const { register, handleSubmit } = useForm()
-    const { data } = useQuery(
-        ["getOtobai"],
-        () => {
-
-        },
-        { keepPreviousData: true, refetchOnReconnect: true, refetchOnWindowFocus: false }
-    )
-
+    const { isLoading, isSuccess }: any = useSelector<RootState>(({ state }) => state.post)
     const onSubmit = useCallback(
         (body: InputProps) => {
-            console.log(body)
-            console.log(data)
+            dispatch(addBike(body))
         },
-        [data],
+        [dispatch],
     )
+    if (isSuccess) alert("Success Add Bike")
+    if (isLoading) console.log("Loading")
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form">
@@ -39,6 +35,7 @@ const Component = ({ match }: RouteComponentProps<Props>) => {
                 <div className="form__input">
                     <label htmlFor="brand">Brand</label>
                     <input
+                        autoComplete="off"
                         id="brand"
                         placeholder="Please enter brand name"
                         autoFocus
@@ -50,6 +47,7 @@ const Component = ({ match }: RouteComponentProps<Props>) => {
                     <input
                         id="ev"
                         type="number"
+                        autoComplete="off"
                         placeholder="Please enter engine volume"
                         className="form__input__control"
                         {...register("engine_volume")} />
@@ -58,7 +56,8 @@ const Component = ({ match }: RouteComponentProps<Props>) => {
                     <label htmlFor="ev">Description (optional)</label>
                     <textarea
                         id="ev"
-                        name="engine_volume"
+                        autoComplete="off"
+                        {...register("description")}
                         placeholder="Please enter description"
                         className="form__input__control" />
                 </div>
