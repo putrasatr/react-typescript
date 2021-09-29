@@ -1,4 +1,4 @@
-import { apolloCllient } from "./connect";
+import { apolloCllient, axiosClient } from "./connect";
 import { ThunkAction, ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux';
 import { GET_BIKE, ADD_BIKE } from "../../graphql";
@@ -20,6 +20,7 @@ export interface SetFetcing {
     type: 'SET_FETCHING'
     isFetching: boolean
 }
+// export interface FileList
 export interface SetLogin {
     type: 'SET_LOGIN'
     status: boolean
@@ -96,6 +97,22 @@ export const addBike = (body: InputProps): ThunkAction<Promise<void>, {}, {}, An
                     }
                 })
                 dispatch(addDataSuccess(add));
+                resolve()
+            } catch (error) {
+                console.log(error)
+            }
+        })
+    }
+}
+
+export const postImage = (file: Blob | string) => {
+    return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
+        return new Promise<void>(async (resolve) => {
+            try {
+                let formData = new FormData();
+                formData.append('image', file)
+                const response = await axiosClient.post("/api/image", formData)
+                console.log("response", response.data)
                 resolve()
             } catch (error) {
                 console.log(error)
