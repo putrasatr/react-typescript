@@ -1,6 +1,5 @@
 import React from 'react';
 import { API_URL_OTOBAI } from '../../../constants';
-// import { Link } from 'react-router-dom';
 
 export type ItemProps = {
     _id: number;
