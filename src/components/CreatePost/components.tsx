@@ -3,26 +3,25 @@ import { RouteComponentProps } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux"
 
-import { addBike, InputProps, postImage } from "../../services/actions"
+import { addBike, deleteImage, InputProps, postImage, setImageLoading } from "../../services/actions"
 import { RootState } from "../../store/store"
+import loadingImg from "../../assets/images/tire.png"
 
 interface Props {
     id?: string;
     productId: string;
 }
-// type DataProps = { [data: string]: string }
-
 
 const Component = ({ match }: RouteComponentProps<Props>) => {
     const { params } = match
     const dispatch = useDispatch()
     const [source, setSource] = useState<string>("");
     const { register, handleSubmit } = useForm()
-    const { isLoading, isSuccess }: any = useSelector<RootState>(({ state }) => state.post)
+    const { isSetImageLoading, filename }: any = useSelector<RootState>(({ state: { post } }) => ({ ...post }))
     const handleCapture = (target: EventTarget & HTMLInputElement) => {
         if (target.files) {
-            console.log('Files', target.files)
             if (target.files.length !== 0) {
+                dispatch(setImageLoading(true))
                 const file = target.files[0];
                 const newUrl = URL.createObjectURL(file);
                 setSource(newUrl);
@@ -32,12 +31,14 @@ const Component = ({ match }: RouteComponentProps<Props>) => {
     }
     const onSubmit = useCallback(
         (body: InputProps) => {
-            dispatch(addBike(body))
+            dispatch(addBike({ ...body, filename }))
         },
-        [dispatch],
+        [dispatch, filename],
     )
-    if (isSuccess) alert("Success Add Bike")
-    if (isLoading) console.log("Loading")
+    const handleDeleteImage = useCallback(() => {
+        dispatch(deleteImage(filename))
+        setSource("")
+    }, [dispatch, filename])
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form">
@@ -78,7 +79,9 @@ const Component = ({ match }: RouteComponentProps<Props>) => {
                 <div className="form__input">
                     <label htmlFor="ev">Post Image</label>
                     {source &&
-                        <div className="box__image">
+                        <div className={`box__image ${isSetImageLoading ? "op-3" : ""}`}>
+                            <div onClick={handleDeleteImage} className="change__img"><h2>Delete</h2></div>
+                            {isSetImageLoading && <img className="img__loading" src={loadingImg} alt="" />}
                             <img src={source} alt={"snap"}></img>
                         </div>}
                     <input
