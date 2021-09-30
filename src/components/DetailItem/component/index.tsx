@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import Fade from "react-reveal/Fade"
 import { useDispatch, useSelector } from 'react-redux';
 import { RouteComponentProps } from 'react-router-dom';
 
@@ -13,20 +14,33 @@ type Props = {
 
 const DetailItem = ({ match }: RouteComponentProps<Props>) => {
     const { params: { bikeId } } = match
+    const [isLoading, setIsLoading] = useState<boolean>(false)
     const dispatch = useDispatch()
     const { data }: any = useSelector<RootState>(({ state: { gallery } }): ResponData => gallery)
-
     useEffect(() => {
+        setIsLoading(true)
         dispatch(getBike(bikeId, ""))
+        setTimeout(() => {
+            setIsLoading(false)
+        }, 1000)
         return () => {
             dispatch(getDataSuccess([]))
         }
     }, [dispatch, bikeId])
-
+    if (isLoading) return <h1>Loading...</h1>
     return (
-        <div>
-            <img src={API_URL_OTOBAI + data[0].image} alt="" style={{ width: '200px', height: "100px" }} />
-        </div>
+        <Fade bottom>
+            <div className="card__detail">
+                <h1>{data[0]?.brand}</h1>
+                <div className="box__image__detail">
+                    <img src={API_URL_OTOBAI + data[0]?.image} alt="" />
+                </div>
+                <div className="detail__description">
+                    <span>{data[0]?.engine_volume.replace(/[A-Za-z]/ig, "")} CC</span>
+                    <span>{data[0]?.description}</span>
+                </div>
+            </div>
+        </Fade>
     )
 };
 
