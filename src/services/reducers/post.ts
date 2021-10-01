@@ -9,7 +9,7 @@ export interface ResponAdd {
     isSetImageLoading: boolean
 }
 const initialState = {
-    data: false,
+    data: [],
     isSuccess: false,
     isLoading: false,
     filename: "",

@@ -3,7 +3,7 @@ import { ThunkAction, ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux';
 import { GET_BIKE, ADD_BIKE } from "../../graphql";
 import { checkUser } from "../../helpers";
-export type DataType = object[] | boolean | []
+export type DataType = object[] | []
 export type ImageType = {
     message: string
     filename: string
@@ -16,11 +16,11 @@ export interface SetAction {
     accessToken: string
 }
 export interface LoadAction {
-    type: "LOAD_DATA"
+    type: "LOAD_DATA" | "LOAD_DATA_FAILED"
     data: DataType;
 }
 export interface AddAction {
-    type: "ADD_DATA"
+    type: "ADD_DATA" | "LOAD_DATA_VIEW"
     data: DataType
 }
 export interface SetFetcing {
@@ -81,11 +81,11 @@ export const login = (username: string, password: string): ThunkAction<Promise<v
 }
 
 // Load Data Home Page
-export const getDataSuccess = (data: DataType): LoadAction => {
-    return { type: 'LOAD_DATA', data }
-}
+export const getDataSuccess = (data: DataType): LoadAction => ({ type: 'LOAD_DATA', data })
 
-export const addDataSuccess = (data: DataType): AddAction => ({ type: 'ADD_DATA', data })
+export const getDataFailed = (): LoadAction => ({ type: "LOAD_DATA_FAILED", data: [] })
+
+export const addDataSuccess = (data: DataType): AddAction => ({ type: 'LOAD_DATA_VIEW', data })
 
 export const setImageSuccess = (data: ImageType): SetImage => ({ type: "SET_IMAGE", filename: data.filename, status: true, isLoading: false })
 
@@ -107,7 +107,8 @@ export const getBike = (bikeId?: string | "", keyword?: string | ""): ThunkActio
                 dispatch(getDataSuccess(otobai.items));
                 resolve()
             } catch (error) {
-                console.log(error)
+                dispatch(getDataFailed())
+                resolve()
             }
         })
     }
@@ -124,10 +125,11 @@ export const addBike = (body: InputProps): ThunkAction<Promise<void>, {}, {}, An
                         brand,
                         engine_volume,
                         description,
-                        image: "images/uploads/"+filename
+                        image: "images/uploads/" + filename
                     }
                 })
-                dispatch(addDataSuccess(add));
+                dispatch(addDataSuccess({ ...add, ...body }));
+                dispatch(getBike("", ""))
                 resolve()
             } catch (error) {
                 console.log(error)

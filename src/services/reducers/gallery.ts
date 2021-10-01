@@ -5,11 +5,19 @@ export interface ResponData {
 }
 
 const gallery = (
-    state: ResponData = { data: false },
+    state: ResponData = { data: [] },
     action: Action): ResponData => {
     switch (action.type) {
         case 'LOAD_DATA':
             return { ...state, data: action.data }
+        case "LOAD_DATA_FAILED":
+            return { ...state, data: action.data }
+        case "LOAD_DATA_VIEW":
+            console.log([...state.data, action.data])
+            return {
+                ...state,
+                data: [...state.data, action.data]
+            }
         default:
             return state
     }
