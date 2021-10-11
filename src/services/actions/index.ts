@@ -3,6 +3,7 @@ import { ThunkAction, ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux';
 import { GET_BIKE, ADD_BIKE } from "../../graphql";
 import { checkUser } from "../../helpers";
+
 export type DataType = object[] | []
 export type ImageType = {
     message: string
@@ -80,7 +81,7 @@ export const login = (username: string, password: string): ThunkAction<Promise<v
     }
 }
 
-// Load Data Home Page
+// Load Data Gallery Page
 export const getDataSuccess = (data: DataType): LoadAction => ({ type: 'LOAD_DATA', data })
 
 export const getDataFailed = (): LoadAction => ({ type: "LOAD_DATA_FAILED", data: [] })
