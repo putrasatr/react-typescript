@@ -3,9 +3,6 @@ export type PropsRoute = {
     add?: string;
     match?: object | string;
 };
-export type Props = {
-    children?: any;
-}
 export const userData = {
     username: "Putra",
     password: "putra234"
